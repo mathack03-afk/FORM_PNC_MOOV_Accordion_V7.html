@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MOOV’ — Candidature PNC (Accordéon V3)</title>
+<style>
+  :root{
+    --violet:#6A1B9A; --violet-dark:#4b167c; --jaune:#F4C542; --gris:#f6f7fb; --bord:#e6e8ee;
+  }
+  * { box-sizing: border-box; }
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;margin:0;background:#fff;color:#111;}
+  header{background:linear-gradient(90deg,var(--violet),var(--violet-dark));color:#fff;padding:14px 18px;display:flex;align-items:center;gap:14px}
+  header img{height:44px; width:auto; display:block; border-radius:6px; background:#fff; padding:2px}
+  header h1{font-size:1.05rem;margin:0;line-height:1.2}
+  .wrap{max-width:900px;margin:24px auto;padding:0 16px}
+  .intro{background:#fff;border:1px solid var(--bord);border-left:4px solid var(--jaune);padding:12px 14px;border-radius:10px}
+  .success{display:none;margin:14px 0;padding:12px 14px;border:1px solid #c6f6d5;background:#f0fff4;border-left:4px solid #16a34a;border-radius:10px;color:#065f46}
+  details{background:var(--gris);border:1px solid var(--bord);border-radius:12px;margin:14px 0;overflow:hidden}
+  summary{list-style:none;cursor:pointer;padding:14px 16px;font-weight:700;color:#2a1b3f;display:flex;align-items:center;gap:10px}
+  summary::before{content:"▸";font-size:18px;transition:transform .2s}
+  details[open] summary::before{transform:rotate(90deg)}
+  .section{padding:14px 16px;padding-top:0}
+  label{display:block;font-weight:600;margin:.6rem 0 .25rem}
+  input,select,textarea{width:100%;padding:.7rem .8rem;border:1px solid #cfd3da;border-radius:10px;background:#fff}
+  textarea{min-height:130px;resize:vertical}
+  .row{display:grid;gap:12px}
+  @media (min-width:640px){.row-2{grid-template-columns:1fr 1fr}}
+  small.hint{color:#555;display:block;margin-top:.25rem}
+  /* Parcourir */
+  .browse{display:inline-flex;align-items:center;gap:.5rem;background:var(--violet);color:#fff;padding:.55rem .9rem;border-radius:10px;font-weight:700;cursor:pointer;border:0}
+  .filebox{display:flex;align-items:center;gap:10px;margin:.35rem 0;flex-wrap:wrap}
+  .filebox input[type="file"]{display:none}
+  .pill{display:inline-flex;align-items:center;gap:.4rem;padding:.3rem .6rem;border:1px dashed #b9bfd1;border-radius:999px;background:#fff;font-size:.9rem;max-width:100%}
+  /* Oui / Non groups */
+  .yn-group{display:flex;gap:18px;align-items:center;flex-wrap:wrap;margin:.35rem 0 0}
+  .yn{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid #cfd3da;border-radius:999px;padding:.4rem .75rem}
+  .yn input{width:auto}
+  .req{color:#b91c1c}
+  .actions{display:flex;gap:10px;align-items:center;margin-top:14px}
+  .btn{appearance:none;border:0;background:var(--violet);color:#fff;padding:12px 18px;border-radius:10px;font-weight:700;cursor:pointer}
+  .ghost{background:#fff;color:#2a1b3f;border:1px solid var(--bord)}
+  footer{margin:28px 0 18px;color:#666;text-align:center;font-size:.9rem}
+</style>
+</head>
+<body>
+<header>
+  <img alt="Logo MOOV’" src="data:image/jpeg;base64,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"/>
+  <h1>MOOV’ — Formulaire de candidature PNC (Hôtesse/Steward)</h1>
+</header>
+
+<main class="wrap">
+  <div id="success" class="success">✅ Votre candidature a bien été envoyée !<br/>Merci pour votre intérêt pour la compagnie MOOV’.</div>
+  <p class="intro">Merci de compléter ce formulaire avec des informations exactes et à jour. Les champs marqués d’un <span class="req">*</span> sont obligatoires. Vous pouvez joindre vos documents via le bouton <b>Parcourir</b>.</p>
+
+  <form id="form" action="#" method="post">
+    <details open>
+      <summary>I. Données personnelles</summary>
+      <div class="section">
+        <div class="row row-2">
+          <div>
+            <label for="nom">Nom <span class="req">*</span></label>
+            <input id="nom" required />
+          </div>
+          <div>
+            <label for="prenom">Prénom <span class="req">*</span></label>
+            <input id="prenom" required />
+          </div>
+        </div>
+        <div class="row row-2">
+          <div>
+            <label for="email">Adresse e-mail <span class="req">*</span></label>
+            <input id="email" type="email" required placeholder="prenom.nom@email.com" />
+          </div>
+          <div>
+            <label for="tel">Téléphone <span class="req">*</span></label>
+            <input id="tel" type="tel" required />
+          </div>
+        </div>
+        <div>
+          <label for="base">Ville / Base souhaitée</label>
+          <select id="base">
+            <option>Marseille</option>
+            <option>Autre</option>
+          </select>
+        </div>
+
+        <div style="margin-top:6px">
+          <label>Joindre vos documents</label>
+          <div class="filebox">
+            <input id="cv" type="file" accept="application/pdf" />
+            <button class="browse" type="button" onclick="document.getElementById('cv').click()">Parcourir</button>
+            <span id="cv-name" class="pill" data-placeholder="CV (PDF) – Aucun fichier">CV (PDF) – Aucun fichier</span>
+          </div>
+          <div class="filebox">
+            <input id="lm" type="file" accept="application/pdf" />
+            <button class="browse" type="button" onclick="document.getElementById('lm').click()">Parcourir</button>
+            <span id="lm-name" class="pill" data-placeholder="Lettre de motivation (PDF) – Aucun fichier">Lettre de motivation (PDF) – Aucun fichier</span>
+          </div>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>II. Éligibilité & disponibilités</summary>
+      <div class="section">
+        <div class="row row-2">
+          <div>
+            <label for="dispo">Date de disponibilité <span class="req">*</span></label>
+            <input id="dispo" type="date" required />
+          </div>
+          <div>
+            <label>Type de contrat</label>
+            <input value="CDI (poste ouvert)" disabled />
+          </div>
+        </div>
+
+        <label>Titulaire du CCA <span class="req">*</span></label>
+        <div class="yn-group">
+          <label class="yn"><input type="radio" name="cca" required value="oui" /> Oui</label>
+          <label class="yn"><input type="radio" name="cca" required value="non" /> Non</label>
+        </div>
+
+        <label style="margin-top:8px">Aptitude médicale <span class="req">*</span></label>
+        <div class="yn-group">
+          <label class="yn"><input type="radio" name="apte" required value="oui" /> Oui</label>
+          <label class="yn"><input type="radio" name="apte" required value="non" /> Non</label>
+        </div>
+
+        <label style="margin-top:8px">Passeport valide</label>
+        <div class="yn-group">
+          <label class="yn"><input type="radio" name="passeport" value="oui" /> Oui</label>
+          <label class="yn"><input type="radio" name="passeport" value="non" /> Non</label>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>III. Compétences linguistiques</summary>
+      <div class="section">
+        <div class="row row-2">
+          <div>
+            <label>Anglais (CECR)</label>
+            <select>
+              <option>A2</option><option>B1</option><option selected>B2</option><option>C1</option><option>C2</option>
+            </select>
+          </div>
+          <div>
+            <label>Deuxième langue</label>
+            <input placeholder="Espagnol, Allemand…" />
+          </div>
+        </div>
+        <div>
+          <label>Niveau 2ᵉ langue</label>
+          <select>
+            <option></option><option>A2</option><option>B1</option><option>B2</option><option>C1</option><option>C2</option>
+          </select>
+        </div>
+      </div>
+    </details>
+
+    <details>
+      <summary>IV. Expériences & motivation</summary>
+      <div class="section">
+        <div class="row row-2">
+          <div>
+            <label>Expérience PNC (mois/années)</label>
+            <input inputmode="numeric" placeholder="ex. 6, 12, 24…" />
+          </div>
+          <div>
+            <label>Expérience service client</label>
+            <select>
+              <option></option>
+              <option>Hôtellerie / Restauration</option>
+              <option>Aérien (au sol)</option>
+              <option>Vente / Relation client</option>
+              <option>Débutant / Autre</option>
+            </select>
+          </div>
+        </div>
+        <label>Motivation (5–8 lignes) <span class="req">*</span></label>
+        <textarea required placeholder="Pourquoi MOOV’, vos qualités relationnelles, gestion du stress, travail en équipe…"></textarea>
+      </div>
+    </details>
+
+    <details>
+      <summary>V. Consentement (RGPD)</summary>
+      <div class="section">
+        <label><input type="checkbox" required /> J’autorise MOOV’ à traiter mes données pour l’étude de ma candidature (RGPD, conservation max. 24 mois).</label>
+        <div class="actions">
+          <button id="send" class="btn" type="submit">Envoyer ma candidature</button>
+        </div>
+      </div>
+    </details>
+  </form>
+</main>
+
+<footer>© MOOV’ — Recrutement PNC</footer>
+
+<script>
+  function bindFile(id, labelId){
+    const input = document.getElementById(id);
+    const label = document.getElementById(labelId);
+    input.addEventListener('change', ()=>{
+      if(input.files && input.files[0]){
+        label.textContent = input.files[0].name;
+      }else{
+        label.textContent = label.dataset.placeholder || label.textContent;
+      }
+    });
+  }
+  bindFile('cv','cv-name');
+  bindFile('lm','lm-name');
+
+  document.getElementById('form').addEventListener('submit', function(e){
+    e.preventDefault();
+    // Affiche la bannière de succès + alert
+    const s = document.getElementById('success');
+    s.style.display = 'block';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    alert('✅ Votre candidature a bien été envoyée !\nMerci pour votre intérêt pour la compagnie MOOV’.');
+  });
+</script>
+</body>
+</html>
